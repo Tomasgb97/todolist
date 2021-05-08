@@ -8,14 +8,14 @@ const logoutBttn = document.getElementById('logoutbutton');
 
 const checkState = () => {
     
-    if(firebase.user){
+    if(firebase.user()){
 
-    return domevent.domevent.logOut();
+    domevent.domevent.logOut();
 
     } 
     else { 
         
-        return domevent.domevent.login();
+     domevent.domevent.login();
     }};
 
 
