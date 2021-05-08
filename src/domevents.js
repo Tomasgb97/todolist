@@ -1,4 +1,4 @@
-import firebase from '../src/firebase'
+
 const domevent = (function (){
 
 const loginBttn = document.getElementById('loginbutton');

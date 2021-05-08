@@ -1,5 +1,4 @@
-import firebase from 'firebase/app';
-
+import firebase from'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
 
@@ -19,7 +18,13 @@ import 'firebase/firestore';
 
 
   const signIn = () => {auth.signInWithPopup(provider)};
-  const signOut = () => {auth.signOut};
+  const getOut = () => {auth.signOut()
+    .then (()=> {
+    console.log('User signed out');
+  })
+  .catch ((e)=> {
+    console.log('error', e);
+  })};
 
 
 
@@ -33,4 +38,4 @@ import 'firebase/firestore';
 
 
 
-  export default {firebase, user, auth, signIn, signOut};
+  export default {user, signIn, getOut};
