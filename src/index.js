@@ -27,13 +27,10 @@ const checkState = () => {
 
 loginBttn.addEventListener('click', function(){
     
-    console.log('3');
     domevent.domevent.logOut()
     firebase.signIn()});
 
 logoutBttn.addEventListener('click', function(){
     
-    console.log('1');
     domevent.domevent.login();
-    console.log('2')
     firebase.getOut()});
