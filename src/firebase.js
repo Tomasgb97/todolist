@@ -18,13 +18,7 @@ import 'firebase/firestore';
 
 
   const signIn = () => {auth.signInWithPopup(provider)};
-  const getOut = () => {auth.signOut()
-    .then (()=> {
-    console.log('User signed out');
-  })
-  .catch ((e)=> {
-    console.log('error', e);
-  })};
+  const getOut = () => {auth.signOut()};
 
 
 
@@ -33,7 +27,9 @@ import 'firebase/firestore';
     if (user){
 
       return true
-    }else {return false};
+    }else {
+      
+      return false};
   });
 
 
