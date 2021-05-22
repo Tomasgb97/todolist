@@ -3,6 +3,8 @@ import domevent from './domevents';
 
 const loginBttn = document.getElementById('loginbutton');
 const logoutBttn = document.getElementById('logoutbutton');
+const addtaskBttn = document.getElementById('addtask')
+
 
 
 
@@ -33,4 +35,34 @@ loginBttn.addEventListener('click', function(){
 logoutBttn.addEventListener('click', function(){
     
     domevent.domevent.login();
-    firebase.getOut()});
+    firebase.getOut();
+    domevent.domevent.rmTaskCointainer();
+    domevent.domevent.activateNavbuttons();
+    });
+
+    addtaskBttn.addEventListener('click', function(){
+
+        domevent.domevent.addTask();
+        domevent.domevent.disableNavbuttons();
+
+        const addTaskAdd = document.getElementById('addbutton');
+        const addTaskCancel = document.getElementById('cancelbutton');
+
+        addTaskAdd.addEventListener('click', addbuttonfunc);
+        addTaskCancel.addEventListener('click', removebuttonfunc);
+    });
+
+
+    const addbuttonfunc = () => {
+
+        domevent.domevent.rmTaskCointainer();
+        domevent.domevent.activateNavbuttons();
+    };
+
+
+
+    const removebuttonfunc =() => {
+
+        domevent.domevent.rmTaskCointainer();
+        domevent.domevent.activateNavbuttons();
+    };
