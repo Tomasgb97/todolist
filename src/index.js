@@ -6,8 +6,6 @@ const logoutBttn = document.getElementById('logoutbutton');
 const addtaskBttn = document.getElementById('addtask')
 
 
-
-
 const checkState = () => {
     
     if(firebase.user()){
@@ -55,8 +53,15 @@ logoutBttn.addEventListener('click', function(){
 
     const addbuttonfunc = () => {
 
+    const nameinput = document.getElementById('nameinput');
+    const categoryinput = document.getElementById('categoryinput');
+    const dateinput = document.getElementById('dateinput');
+    const notesinput = document.getElementById('notesinput');
+
         domevent.domevent.rmTaskCointainer();
         domevent.domevent.activateNavbuttons();
+        firebase.newAct(nameinput.value, categoryinput.value, dateinput.value, notesinput.value);
+
     };
 
 

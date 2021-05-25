@@ -25,13 +25,31 @@ import 'firebase/firestore';
   const user = auth.onAuthStateChanged(user => {
 
     if (user){
-
       return true
     }else {
       
       return false};
   });
 
+  const alldb = firebase.firestore().collection('all');
+
+  const newAct = (name, category, date, notes) => {
+
+    const activity =
+      {
+
+        name,
+        category,
+        date,
+        notes,
+        finished: false
+  
+      }
+
+    alldb.add(activity);
+
+  }
 
 
-  export default {user, signIn, getOut};
+
+  export default {user, signIn, getOut, newAct};

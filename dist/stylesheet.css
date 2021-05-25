@@ -241,8 +241,9 @@ button:hover{
 #addtaskcontainer{
 
     position: absolute;
-    left: 50%;
+    left: 40%;
     padding: 20px;
+    width: 37%;
     border-radius: 20px;
     display: flex;
     flex-direction: column;
@@ -257,6 +258,16 @@ button:hover{
 
     display: flex;
     justify-content: space-between;
+}
+
+#nameinput, #categoryinput{
+
+    width: 80%;
+}
+
+#dateinput{
+
+    width: 80.5%;
 }
 
 #notescontainer{

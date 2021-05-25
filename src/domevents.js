@@ -13,6 +13,22 @@ const loggedin = document.querySelectorAll('.toremove');
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const login = () => {
 
     loginBttn.style.display = 'block';
@@ -29,10 +45,6 @@ const logOut = () => {
 
     
 };
-
-
-
-
 
 
 
@@ -82,7 +94,7 @@ const addTask = () => {
         
         const partContainer = document.createElement('div');
         const partLabel = document.createElement('label');
-        const partInput = document.createElement('input');
+        let partInput = document.createElement('input');
 
         partLabel.textContent = `${part}`;
 
@@ -90,6 +102,25 @@ const addTask = () => {
         partContainer.setAttribute('id', `${part}container`);
         partLabel.setAttribute('id', `${part}label`);
         partInput.setAttribute('id', `${part}input`);
+
+
+        if(part == 'date'){
+
+            partInput.setAttribute("type", "date");
+        }else if (part == 'category'){
+            const categories = (document.getElementById('categories')).querySelectorAll('button')
+            partInput = document.createElement('select');
+            partInput.setAttribute('id', `${part}input`);
+
+            categories.forEach( one => {
+
+                const opts = document.createElement('option');
+                opts.value = one.textContent;
+                opts.textContent = one.textContent;
+                partInput.appendChild(opts);
+                
+            })
+        }
 
         partContainer.appendChild(partLabel);
         partContainer.appendChild(partInput);
@@ -116,7 +147,13 @@ const addTask = () => {
         
 
         
-    })
+    });
+
+
+
+
+
+
 
     const buttonsDiv =document.createElement('div');
     buttonsDiv.classList.add('buttonsdiv');
@@ -148,6 +185,16 @@ const addTask = () => {
 
 
 
+
+
+
+
+
+
+
+
+
+
 const rmTaskCointainer = () => {
 
     const container = document.getElementById('addtaskcontainer');
@@ -160,6 +207,19 @@ const rmTaskCointainer = () => {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
  const disableNavbuttons = () => {
 
     navbuttons.forEach(one => {
@@ -167,6 +227,15 @@ const rmTaskCointainer = () => {
         one.setAttribute('disabled', 'true');
     });
  };
+
+
+
+
+
+
+
+
+
 
 
  const activateNavbuttons =() => {
