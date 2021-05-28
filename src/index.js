@@ -1,14 +1,20 @@
 import firebase from '../src/firebase';
 import domevent from './domevents';
+import swal from 'sweetalert';
 
 const loginBttn = document.getElementById('loginbutton');
 const logoutBttn = document.getElementById('logoutbutton');
 const addtaskBttn = document.getElementById('addtask')
 
 
+
+
+
+
+
 const checkState = () => {
     
-    if(firebase.user()){
+    if(firebase.userState){
 
     domevent.domevent.logOut();
 
@@ -57,13 +63,17 @@ logoutBttn.addEventListener('click', function(){
     const categoryinput = document.getElementById('categoryinput');
     const dateinput = document.getElementById('dateinput');
     const notesinput = document.getElementById('notesinput');
-
+         if(nameinput.value == "" ||
+            categoryinput.value == "" ||
+            dateinput.value == ""){
+                swal('Please fill at least the first 3 fields please')
+            }else{
         domevent.domevent.rmTaskCointainer();
         domevent.domevent.activateNavbuttons();
-        firebase.newAct(nameinput.value, categoryinput.value, dateinput.value, notesinput.value);
+        // let personalUser = firebase.checkAuthChange();
+        firebase.newAct(nameinput.value, categoryinput.value, dateinput.value, notesinput.value);}
 
     };
-
 
 
     const removebuttonfunc =() => {

@@ -15,41 +15,46 @@ import 'firebase/firestore';
 
   const auth = firebase.auth();
   const provider = new firebase.auth.GoogleAuthProvider();
+  const alldb = firebase.firestore().collection('all');
 
 
   const signIn = () => {auth.signInWithPopup(provider)};
   const getOut = () => {auth.signOut()};
+  let userState;
 
 
-
-  const user = auth.onAuthStateChanged(user => {
-
+  auth.onAuthStateChanged(user => { 
     if (user){
-      return true
-    }else {
-      
-      return false};
+    userState = true;
+    }
+
+    else{
+      userState = false;
+    };
+
   });
 
-  const alldb = firebase.firestore().collection('all');
-
   const newAct = (name, category, date, notes) => {
-
-    const activity =
-      {
-
-        name,
-        category,
-        date,
-        notes,
-        finished: false
-  
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        alldb.add({
+          name,
+          category,
+          date,
+          notes,
+          finished: false,
+          user: user.uid
+        });
       }
-
-    alldb.add(activity);
+    })
+    
 
   }
 
+  
+
+ 
 
 
-  export default {user, signIn, getOut, newAct};
+
+  export default {userState, signIn, getOut, newAct}

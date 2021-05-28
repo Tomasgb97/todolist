@@ -199,7 +199,9 @@ const rmTaskCointainer = () => {
 
     const container = document.getElementById('addtaskcontainer');
 
-    container.remove();
+    if(container){
+
+    container.remove();}
 
 };
 
