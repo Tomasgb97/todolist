@@ -21,18 +21,21 @@ import 'firebase/firestore';
   const signIn = () => {auth.signInWithPopup(provider)};
   const getOut = () => {auth.signOut()};
   let userState;
+  let userId;
 
 
-  auth.onAuthStateChanged(user => { 
-    if (user){
+auth.onAuthStateChanged(user => {
+  if (user) {
     userState = true;
-    }
+    userId = user.uid;
+    
+  }
 
-    else{
-      userState = false;
-    };
+  else {
+    userState = false;
+  };
 
-  });
+});
 
   const newAct = (name, category, date, notes) => {
     auth.onAuthStateChanged((user) => {
@@ -48,8 +51,22 @@ import 'firebase/firestore';
       }
     })
     
-
   }
+
+const BringAllTopics = (func) => {
+
+      alldb
+        .where('user', '==', userId)
+        .get()
+        .then((snapshot) => {
+
+        snapshot.docs.map(doc => func(doc.data()));
+
+        })
+        .catch(error => {
+          console.log('fallo promesa');
+        });
+}
 
   
 
@@ -57,4 +74,4 @@ import 'firebase/firestore';
 
 
 
-  export default {userState, signIn, getOut, newAct}
+  export default {userState, signIn, getOut, newAct, BringAllTopics}

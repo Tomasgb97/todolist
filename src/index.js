@@ -4,7 +4,9 @@ import swal from 'sweetalert';
 
 const loginBttn = document.getElementById('loginbutton');
 const logoutBttn = document.getElementById('logoutbutton');
-const addtaskBttn = document.getElementById('addtask')
+const addtaskBttn = document.getElementById('addtask');
+
+const allTopics = document.getElementById('alltopics');
 
 
 
@@ -13,71 +15,82 @@ const addtaskBttn = document.getElementById('addtask')
 
 
 const checkState = () => {
-    
-    if(firebase.userState){
 
-    domevent.domevent.logOut();
+    if (firebase.userState) {
 
-    } 
-    else { 
-        
-     domevent.domevent.login();
-    }};
+        domevent.domevent.logOut();
 
+    }
+    else {
 
-
-    checkState();
+        domevent.domevent.login();
+    }
+};
 
 
 
+checkState();
 
-loginBttn.addEventListener('click', function(){
-    
+
+
+
+loginBttn.addEventListener('click', function () {
+
     domevent.domevent.logOut()
-    firebase.signIn()});
+    firebase.signIn()
+});
 
-logoutBttn.addEventListener('click', function(){
-    
+logoutBttn.addEventListener('click', function () {
+
     domevent.domevent.login();
     firebase.getOut();
     domevent.domevent.rmTaskCointainer();
     domevent.domevent.activateNavbuttons();
-    });
+});
 
-    addtaskBttn.addEventListener('click', function(){
+addtaskBttn.addEventListener('click', function () {
 
-        domevent.domevent.addTask();
-        domevent.domevent.disableNavbuttons();
+    domevent.domevent.addTask();
+    domevent.domevent.disableNavbuttons();
 
-        const addTaskAdd = document.getElementById('addbutton');
-        const addTaskCancel = document.getElementById('cancelbutton');
+    const addTaskAdd = document.getElementById('addbutton');
+    const addTaskCancel = document.getElementById('cancelbutton');
 
-        addTaskAdd.addEventListener('click', addbuttonfunc);
-        addTaskCancel.addEventListener('click', removebuttonfunc);
-    });
+    addTaskAdd.addEventListener('click', addbuttonfunc);
+    addTaskCancel.addEventListener('click', removebuttonfunc);
+});
 
 
-    const addbuttonfunc = () => {
+const addbuttonfunc = () => {
 
     const nameinput = document.getElementById('nameinput');
     const categoryinput = document.getElementById('categoryinput');
     const dateinput = document.getElementById('dateinput');
     const notesinput = document.getElementById('notesinput');
-         if(nameinput.value == "" ||
-            categoryinput.value == "" ||
-            dateinput.value == ""){
-                swal('Please fill at least the first 3 fields please')
-            }else{
+    if (nameinput.value == "" ||
+        categoryinput.value == "" ||
+        dateinput.value == "") {
+        swal('Please fill at least the first 3 fields please');
+    } else {
         domevent.domevent.rmTaskCointainer();
         domevent.domevent.activateNavbuttons();
-        // let personalUser = firebase.checkAuthChange();
-        firebase.newAct(nameinput.value, categoryinput.value, dateinput.value, notesinput.value);}
+        firebase.newAct(nameinput.value, categoryinput.value, dateinput.value, notesinput.value);
+        
+    }
 
-    };
+};
 
 
-    const removebuttonfunc =() => {
+const removebuttonfunc = () => {
 
-        domevent.domevent.rmTaskCointainer();
-        domevent.domevent.activateNavbuttons();
-    };
+    domevent.domevent.rmTaskCointainer();
+    domevent.domevent.activateNavbuttons();
+};
+
+
+
+allTopics.addEventListener('click', function(){
+
+    domevent.domevent.removeActs();
+    firebase.BringAllTopics(domevent.domevent.createAct);
+})
