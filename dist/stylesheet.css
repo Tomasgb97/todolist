@@ -139,6 +139,7 @@ button:hover{
     border-left: 2px solid white;
     margin-right: 5px;
     max-height: 50px;
+    overflow-y: auto;
 }
 .eventimages{
     width: 10%;
@@ -229,6 +230,7 @@ button:hover{
     display: flex;
     justify-content: center;
     align-items: center;
+    font-weight: 600;
 }
 .navbttn1{
         background: #8080804f;

@@ -68,10 +68,41 @@ const BringAllTopics = (func) => {
         });
 }
 
+const BringCategories = (func) => {
+
+  alldb
+    .where('user', '==', userId)
+    .get()
+    .then((snapshot) => {
+
+      snapshot.docs.forEach(doc => func(doc.data().category));
+
+    })
+    .catch(error => {
+      console.log('fallo promesa');
+    });
+}
+
+const BringThisEvents = (func, category) => {
+
+  alldb
+    .where('user', '==', userId)
+    .where('category', '==', category)
+    .get()
+    .then((snapshot) => {
+
+    snapshot.docs.map(doc => func(doc.data()));
+
+    })
+    .catch(error => {
+      console.log('fallo promesa');
+    });
+}
+
   
 
  
 
 
 
-  export default {userState, signIn, getOut, newAct, BringAllTopics}
+  export default {userState, signIn, getOut, newAct, BringAllTopics, BringCategories, BringThisEvents}

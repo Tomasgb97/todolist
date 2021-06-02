@@ -1,3 +1,4 @@
+import swal from "sweetalert";
 
 const domevent = (function () {
 
@@ -311,14 +312,82 @@ const domevent = (function () {
     }
 
 
-
+        //-----------------------------------------------------//
     const removeActs = () => {
         const acts = document.querySelectorAll('.event');
 
         acts.forEach(element => element.remove());
     }
 
-    return { login, logOut, addTask, rmTaskCointainer, disableNavbuttons, activateNavbuttons, createAct, removeActs }
+
+    //----------------------------------------------------------//
+
+    const newCatDiv = () => {
+
+        swal({
+            text: "Remember that if you don't add any new activity to the category it will be deleted",
+            icon: "info",
+            content: {
+            element: "input",
+            attributes:{
+
+                placeholder: "Name your new category",
+                id: `${"newcatid"}`
+            }
+            }
+        }).then((value) => {
+
+            if(value != "" && value != null){
+
+            swal({
+
+                icon: "success",
+                text: "The new category has been added !"
+            })
+
+            const container = document.getElementById('categories');
+
+            const button = document.createElement('button');
+            button.textContent = `${value}`
+            button.classList.add('navbuttons')
+            button.setAttribute('id', `${value}button`);
+            container.appendChild(button)
+            removeActs();}else{
+
+                swal({
+
+                    icon: "error",
+                    text: "Mehhh it wasn't that important anyway..."
+                })
+            }
+            });
+    }
+
+    //-----------------------------------------------------------//
+
+    const createCatBttns = (cat) => {
+
+            if((cat != "All topics ")
+             && (cat != undefined)
+             && (!document.getElementById(`${cat}button`))){
+
+            const container = document.getElementById('categories');
+
+            console.log(cat);
+
+            const button = document.createElement('button');
+            button.textContent = `${cat}`
+            button.classList.add('navbuttons')
+            button.classList.add('topic');
+            button.setAttribute('id', `${cat}button`);
+
+
+            container.appendChild(button);}
+            ;
+
+    }
+
+    return { login, logOut, addTask, rmTaskCointainer, disableNavbuttons, activateNavbuttons, createAct, removeActs, newCatDiv, createCatBttns }
 })();
 
 export default { domevent };
