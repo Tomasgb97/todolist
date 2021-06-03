@@ -45,6 +45,7 @@ const domevent = (function () {
 
         loginBttn.style.display = 'none';
         logoutBttn.style.display = 'block';
+        removeActs();
         loggedin.forEach(element => element.style.visibility = 'visible');
 
 
@@ -55,7 +56,19 @@ const domevent = (function () {
 
 
 
+    const welcome = () => {
 
+        swal({
+
+            title: "WELCOME!",
+
+            icon: "success",
+
+            text: `Hello, my name is Tomas, and this is my To-do list app project.
+         For this app I've used Vanilla Js, HTML 5, CSS3, Webpack, Npm, Firebase, Git and some libraries.
+         You can contact me through my Linked-in profile on the footer icon or check out the project repo on Github!`
+        })
+    }
 
 
 
@@ -230,7 +243,9 @@ const domevent = (function () {
 
     const disableNavbuttons = () => {
 
-        navbuttons.forEach(one => {
+        const buttons = document.querySelectorAll('.navbuttons, .navbttn1');
+
+        buttons.forEach(one => {
 
             one.setAttribute('disabled', 'true');
         });
@@ -248,7 +263,9 @@ const domevent = (function () {
 
     const activateNavbuttons = () => {
 
-        navbuttons.forEach(one => {
+        const buttons = document.querySelectorAll('.navbuttons, .navbttn1');
+
+        buttons.forEach(one => {
 
             one.removeAttribute('disabled');
         });
@@ -257,9 +274,10 @@ const domevent = (function () {
 
 
 
-    const createAct = (activity) => {
+    const createAct = (activity, id, deleteFunc) => {
 
         const container = document.createElement('div');
+        container.setAttribute('id', id);
         container.classList.add('event');
         if (activity.finished == false) {
             container.classList.add('notdone')
@@ -298,7 +316,24 @@ const domevent = (function () {
         const eventImages = document.createElement('div');
         eventImages.classList.add('eventimages');
 
+        const trash = document.createElement('img');
+        trash.setAttribute('src', '../images/trash.png');
 
+        trash.addEventListener('click', function(){
+
+            container.remove();
+            deleteFunc(id)})
+
+
+        const taskState = document.createElement('img');
+        if (activity.finished == false) {
+            taskState.setAttribute('src', '../images/undone.png')
+        } else {
+
+            taskState.setAttribute('src', '../images/done.png')
+        }
+
+        eventImages.append(trash, taskState);
         //--------------------------------------------------//
 
         container.append(name, infocontainer);
@@ -312,7 +347,7 @@ const domevent = (function () {
     }
 
 
-        //-----------------------------------------------------//
+    //-----------------------------------------------------//
     const removeActs = () => {
         const acts = document.querySelectorAll('.event');
 
@@ -328,31 +363,32 @@ const domevent = (function () {
             text: "Remember that if you don't add any new activity to the category it will be deleted",
             icon: "info",
             content: {
-            element: "input",
-            attributes:{
+                element: "input",
+                attributes: {
 
-                placeholder: "Name your new category",
-                id: `${"newcatid"}`
-            }
+                    placeholder: "Name your new category",
+                    id: `${"newcatid"}`
+                }
             }
         }).then((value) => {
 
-            if(value != "" && value != null){
+            if (value != "" && value != null) {
 
-            swal({
+                swal({
 
-                icon: "success",
-                text: "The new category has been added !"
-            })
+                    icon: "success",
+                    text: "The new category has been added !"
+                })
 
-            const container = document.getElementById('categories');
+                const container = document.getElementById('categories');
 
-            const button = document.createElement('button');
-            button.textContent = `${value}`
-            button.classList.add('navbuttons')
-            button.setAttribute('id', `${value}button`);
-            container.appendChild(button)
-            removeActs();}else{
+                const button = document.createElement('button');
+                button.textContent = `${value}`
+                button.classList.add('navbuttons')
+                button.setAttribute('id', `${value}button`);
+                container.appendChild(button)
+                removeActs();
+            } else {
 
                 swal({
 
@@ -360,16 +396,16 @@ const domevent = (function () {
                     text: "Mehhh it wasn't that important anyway..."
                 })
             }
-            });
+        });
     }
 
     //-----------------------------------------------------------//
 
     const createCatBttns = (cat) => {
 
-            if((cat != "All topics ")
-             && (cat != undefined)
-             && (!document.getElementById(`${cat}button`))){
+        if ((cat != "All topics ")
+            && (cat != undefined)
+            && (!document.getElementById(`${cat}button`))) {
 
             const container = document.getElementById('categories');
 
@@ -382,12 +418,21 @@ const domevent = (function () {
             button.setAttribute('id', `${cat}button`);
 
 
-            container.appendChild(button);}
-            ;
+            container.appendChild(button);
+        }
+        ;
 
     }
 
-    return { login, logOut, addTask, rmTaskCointainer, disableNavbuttons, activateNavbuttons, createAct, removeActs, newCatDiv, createCatBttns }
+
+    const removeCats = () => {
+
+        const buttons = document.querySelectorAll('.topic');
+
+        buttons.forEach(element => element.remove());
+    }
+
+    return { login, logOut, welcome, addTask, rmTaskCointainer, disableNavbuttons, activateNavbuttons, createAct, removeActs, newCatDiv, createCatBttns, removeCats }
 })();
 
 export default { domevent };
