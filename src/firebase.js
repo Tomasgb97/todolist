@@ -61,7 +61,7 @@ const BringAllTopics = (func) => {    //Brings all the topics from a user
     .get()
     .then((snapshot) => {
 
-      snapshot.docs.map(doc => func(doc.data(), doc.id, fbRemove));
+      snapshot.docs.map(doc => func(doc.data(), doc.id, fbRemove, fbUpdate));
 
     })
     .catch(error => {
@@ -92,7 +92,7 @@ const BringThisEvents = (func, category) => {       //Brings only the called cat
     .get()
     .then((snapshot) => {
       console.log('nannana')
-      snapshot.docs.map(doc =>  func(doc.data(), doc.id, fbRemove))
+      snapshot.docs.map(doc =>  func(doc.data(), doc.id, fbRemove, fbUpdate))
      
      
 
@@ -107,8 +107,16 @@ const fbRemove = (id) => {
   alldb.doc(id).delete();
 }
 
+const fbUpdate = (id, newnote) => {
+
+  alldb.doc(id).update({
+
+    notes: newnote
+  })
+}
 
 
 
 
-export default { userState, signIn, getOut, newAct, BringAllTopics, BringCategories, BringThisEvents, fbRemove }
+
+export default { userState, signIn, getOut, newAct, BringAllTopics, BringCategories, BringThisEvents, fbRemove, fbUpdate }

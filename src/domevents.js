@@ -274,10 +274,22 @@ const domevent = (function () {
 
 
 
-    const createAct = (activity, id, deleteFunc) => {
+
+
+
+
+
+
+
+
+
+
+
+
+    const createAct = (activity, fileId, deleteFunc, udpateFunc) => {
 
         const container = document.createElement('div');
-        container.setAttribute('id', id);
+        container.setAttribute('id', fileId);
         container.classList.add('event');
         if (activity.finished == false) {
             container.classList.add('notdone')
@@ -301,6 +313,46 @@ const domevent = (function () {
 
         const eventNotes = document.createElement('div');
         eventNotes.classList.add('eventnotes');
+        eventNotes.addEventListener('dblclick', function () {
+
+            swal({
+
+
+                title: `Update "${activity.name}" notes.`,
+                content: {
+
+                    element: "textarea",
+                    attributes: {
+
+                        id: "textarea"
+
+                    }
+                },
+                buttons: {
+
+                    cancel: "cancel",
+                    OK: "OK",
+                }
+
+            }).then((value1) => {
+
+                const newContent = document.getElementById('textarea').value;
+                switch (value1) {
+
+                    case "OK": swal({
+
+                        icon: "success",
+                        title: "Notes modified !"
+                    }).then(
+
+                        function () {
+                            eventNotes.textContent = newContent
+                            udpateFunc(fileId, newContent)
+                        }
+                    )
+                }
+            })
+        })
         if (activity.notes == "") {
             eventNotes.textContent = "This activity has no notes"
         } else {
@@ -319,39 +371,41 @@ const domevent = (function () {
         const trash = document.createElement('img');
         trash.setAttribute('src', '../images/trash.png');
 
-        trash.addEventListener('click', function(){swal({
+        trash.addEventListener('click', function () {
+            swal({
 
-            title: `You are going to delete ${activity.name}.
+                title: `You are going to delete "${activity.name}"
                 Are you sure ? `,
 
-            dangerMode: true,
+                dangerMode: true,
 
-            icon: "warning",
+                icon: "warning",
 
-            buttons: {
+                buttons: {
 
-                cancel: "cancel",
-                
-                ok: { 
-                    text: "ok",
-                    value:"OK",
+                    cancel: "cancel",
+
+                    ok: {
+                        text: "ok",
+                        value: "OK",
+                    }
                 }
-            }
-        })
-        .then((value) => {
+            })
+                .then((value) => {
 
-            switch(value){
+                    switch (value) {
 
-                case "OK":
-                    swal("Done !", 'Activity deleted !', "success")
-                    
-                        container.remove();
-                        deleteFunc(id);
-                    break;
+                        case "OK":
+                            swal("Done !", 'Activity deleted !', "success")
 
-                default: 
-            }
-        })});
+                            container.remove();
+                            deleteFunc(fileId);
+                            break;
+
+                        default:
+                    }
+                })
+        });
 
 
         const taskState = document.createElement('img');
@@ -376,7 +430,26 @@ const domevent = (function () {
     }
 
 
-    //-----------------------------------------------------//
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     const removeActs = () => {
         const acts = document.querySelectorAll('.event');
 
@@ -384,7 +457,8 @@ const domevent = (function () {
     }
 
 
-    //----------------------------------------------------------//
+
+
 
     const newCatDiv = () => {
 
@@ -414,6 +488,7 @@ const domevent = (function () {
                 const button = document.createElement('button');
                 button.textContent = `${value}`
                 button.classList.add('navbuttons')
+                button.classList.add('topic')
                 button.setAttribute('id', `${value}button`);
                 container.appendChild(button)
                 removeActs();
@@ -428,7 +503,14 @@ const domevent = (function () {
         });
     }
 
-    //-----------------------------------------------------------//
+
+
+
+
+
+
+
+    
 
     const createCatBttns = (cat) => {
 

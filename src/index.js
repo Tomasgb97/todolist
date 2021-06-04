@@ -111,12 +111,11 @@ addcatBttn.addEventListener('click', function () {
 
 const showCats = () => {
 
+    domevent.domevent.removeCats();
     firebase.BringCategories(domevent.domevent.createCatBttns);
 
     setTimeout(function () {
         const cats = document.querySelectorAll('.topic');
-
-        console.log(cats);
 
         cats.forEach(cat =>
 
