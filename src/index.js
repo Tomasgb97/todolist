@@ -12,7 +12,7 @@ const allTopics = document.getElementById('alltopics');
 
 
 
-
+setTimeout(domevent.domevent.welcome(), 1500)
 
 
 const checkState = () => {
@@ -40,7 +40,6 @@ loginBttn.addEventListener('click', function () {
     domevent.domevent.logOut()
     firebase.signIn()
     showCats();
-    setTimeout(domevent.domevent.welcome(), 1500)
 });
 
 logoutBttn.addEventListener('click', function () {

@@ -319,10 +319,39 @@ const domevent = (function () {
         const trash = document.createElement('img');
         trash.setAttribute('src', '../images/trash.png');
 
-        trash.addEventListener('click', function(){
+        trash.addEventListener('click', function(){swal({
 
-            container.remove();
-            deleteFunc(id)})
+            title: `You are going to delete ${activity.name}.
+                Are you sure ? `,
+
+            dangerMode: true,
+
+            icon: "warning",
+
+            buttons: {
+
+                cancel: "cancel",
+                
+                ok: { 
+                    text: "ok",
+                    value:"OK",
+                }
+            }
+        })
+        .then((value) => {
+
+            switch(value){
+
+                case "OK":
+                    swal("Done !", 'Activity deleted !', "success")
+                    
+                        container.remove();
+                        deleteFunc(id);
+                    break;
+
+                default: 
+            }
+        })});
 
 
         const taskState = document.createElement('img');
