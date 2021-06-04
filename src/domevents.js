@@ -125,7 +125,7 @@ const domevent = (function () {
 
                     partInput.setAttribute("type", "date");
                 } else if (part == 'category') {
-                    const categories = (document.getElementById('categories')).querySelectorAll('button')
+                    const categories = (document.getElementById('categories')).querySelectorAll('.topic')
                     partInput = document.createElement('select');
                     partInput.setAttribute('id', `${part}input`);
 
@@ -291,10 +291,8 @@ const domevent = (function () {
         const container = document.createElement('div');
         container.setAttribute('id', fileId);
         container.classList.add('event');
-        if (activity.finished == false) {
-            container.classList.add('notdone')
-        }
-        else { container.classList.add('done') }
+        if (activity.finished)
+        { container.classList.add('done') }
         //--------------------------------------------------//
         const name = document.createElement('name');
         name.classList.add('eventname');
@@ -347,7 +345,7 @@ const domevent = (function () {
 
                         function () {
                             eventNotes.textContent = newContent
-                            udpateFunc(fileId, newContent)
+                            udpateFunc(fileId, "notes", newContent)
                         }
                     )
                 }
@@ -415,6 +413,20 @@ const domevent = (function () {
 
             taskState.setAttribute('src', '../images/done.png')
         }
+        taskState.addEventListener('dblclick', function(){
+
+            container.classList.toggle('done');
+
+            if (activity.finished == true) {
+
+                taskState.setAttribute('src', '../images/undone.png');
+                udpateFunc(fileId, "finished", false);
+            } else {
+                taskState.setAttribute('src', '../images/done.png');
+                udpateFunc(fileId, "finished", true);
+            }
+
+        })
 
         eventImages.append(trash, taskState);
         //--------------------------------------------------//
@@ -458,69 +470,28 @@ const domevent = (function () {
 
 
 
+    const createNewCatBttn=(value) => {
 
+        const container = document.getElementById('categories');
 
-    const newCatDiv = () => {
-
-        swal({
-            text: "Remember that if you don't add any new activity to the category it will be deleted",
-            icon: "info",
-            content: {
-                element: "input",
-                attributes: {
-
-                    placeholder: "Name your new category",
-                    id: `${"newcatid"}`
-                }
-            }
-        }).then((value) => {
-
-            if (value != "" && value != null) {
-
-                swal({
-
-                    icon: "success",
-                    text: "The new category has been added !"
-                })
-
-                const container = document.getElementById('categories');
-
-                const button = document.createElement('button');
-                button.textContent = `${value}`
-                button.classList.add('navbuttons')
-                button.classList.add('topic')
-                button.setAttribute('id', `${value}button`);
-                container.appendChild(button)
-                removeActs();
-            } else {
-
-                swal({
-
-                    icon: "error",
-                    text: "Mehhh it wasn't that important anyway..."
-                })
-            }
-        });
+        const button = document.createElement('button');
+        button.textContent = `${value}`
+        button.classList.add('navbuttons')
+        button.classList.add('topic')
+        button.setAttribute('id', `${value}button`);
+        container.appendChild(button)
+        removeActs();
     }
 
 
 
-
-
-
-
-
-    
-
-    const createCatBttns = (cat) => {
+    const RefreshCatBttns = (cat) => {
 
         if ((cat != "All topics ")
             && (cat != undefined)
             && (!document.getElementById(`${cat}button`))) {
 
             const container = document.getElementById('categories');
-
-            console.log(cat);
 
             const button = document.createElement('button');
             button.textContent = `${cat}`
@@ -543,7 +514,7 @@ const domevent = (function () {
         buttons.forEach(element => element.remove());
     }
 
-    return { login, logOut, welcome, addTask, rmTaskCointainer, disableNavbuttons, activateNavbuttons, createAct, removeActs, newCatDiv, createCatBttns, removeCats }
+    return { login, logOut, welcome, addTask, rmTaskCointainer, disableNavbuttons, activateNavbuttons, createAct, removeActs, createNewCatBttn, RefreshCatBttns, removeCats }
 })();
 
 export default { domevent };

@@ -103,16 +103,47 @@ allTopics.addEventListener('click', function () {
 
 addcatBttn.addEventListener('click', function () {
 
-    domevent.domevent.newCatDiv();
-    showCats();
+    swal({
+        text: "Remember that if you don't add any new activity to the category it will be deleted",
+        icon: "info",
+        content: {
+            element: "input",
+            attributes: {
 
-})
+                placeholder: "Name your new category",
+                id: `${"newcatid"}`
+            }
+        }
+    }).then((value) => {
+
+        if (value != "" && value != null) {
+
+            swal({
+
+                icon: "success",
+                text: "The new category has been added !"
+                
+            })
+            domevent.domevent.createNewCatBttn(value);
+            showCats();
+      
+        } else {
+
+            swal({
+
+                icon: "error",
+                text: "Mehhh it wasn't that important anyway..."
+            })
+        }
+    });
+}
+)
 
 
 const showCats = () => {
 
-    domevent.domevent.removeCats();
-    firebase.BringCategories(domevent.domevent.createCatBttns);
+
+    firebase.BringCategories(domevent.domevent.RefreshCatBttns);
 
     setTimeout(function () {
         const cats = document.querySelectorAll('.topic');

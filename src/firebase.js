@@ -91,7 +91,6 @@ const BringThisEvents = (func, category) => {       //Brings only the called cat
     .where('category', '==', category)
     .get()
     .then((snapshot) => {
-      console.log('nannana')
       snapshot.docs.map(doc =>  func(doc.data(), doc.id, fbRemove, fbUpdate))
      
      
@@ -107,11 +106,11 @@ const fbRemove = (id) => {
   alldb.doc(id).delete();
 }
 
-const fbUpdate = (id, newnote) => {
+const fbUpdate = (id, variable, newinfo) => {
 
   alldb.doc(id).update({
 
-    notes: newnote
+    [variable]: newinfo
   })
 }
 
