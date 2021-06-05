@@ -145,6 +145,7 @@ button:hover{
     text-transform: capitalize;
     font-family: 'labels';
     padding-bottom: 2px;
+    user-select: none;
 }
 .eventnotes{
 
