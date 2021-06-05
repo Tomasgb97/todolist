@@ -417,7 +417,7 @@ const domevent = (function () {
 
             container.classList.toggle('done');
 
-            if (activity.finished == true) {
+            if (taskState.getAttribute("src") == '../images/done.png' ) {
 
                 taskState.setAttribute('src', '../images/undone.png');
                 udpateFunc(fileId, "finished", false);

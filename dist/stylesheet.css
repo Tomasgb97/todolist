@@ -22,6 +22,15 @@
     }
 }
 
+@font-face {
+    font-family: labels;
+    src: url(../fonts/BebasNeue-Regular.ttf);
+}
+@font-face {
+    font-family: ropasans;
+    src: url(../fonts/RopaSans-Italic.ttf);
+}
+
 body{    
     width: 100%;
     height: 100vh;
@@ -124,15 +133,22 @@ button:hover{
     transform: scale(1.03);
     transition: 0.6s;
 }
+.event p{
+
+    font-family: ropasans;
+}
 .eventcontainer{
 
     display: flex;
 }
 .eventname{
     text-transform: capitalize;
+    font-family: 'labels';
+    padding-bottom: 2px;
 }
 .eventnotes{
 
+    font-family: ropasans;
     padding: 3px;
     flex-grow: 1;
     width: 70%;
@@ -141,6 +157,7 @@ button:hover{
     margin-right: 5px;
     max-height: 50px;
     overflow-y: auto;
+    cursor: pointer;
 }
 .eventimages{
     width: 10%;
@@ -152,7 +169,8 @@ button:hover{
 .eventimages img{
 
     width: 20%;
-    margin-bottom: 12px;
+    margin-bottom: 5px;
+    cursor: pointer;
 }
 .eventimages img:hover{
 
@@ -236,7 +254,7 @@ button:hover{
 }
 .navbttn1{
 
-    background: #0090b14f;
+    background: #4c8bf559;
     border-radius: 6px;
     box-shadow: -1px 2px 5px 0px #0000006b;
     padding: 5px;
@@ -301,7 +319,7 @@ button:hover{
     flex-direction: column;
     justify-content: space-between;
     height: 400px;
-    background: rgba(181, 179, 182, 0.418);
+    background: rgb(242 240 243 / 97%);
     filter: drop-shadow(2px 4px 1px rgba(146, 145, 145, 0.842));
     z-index: 1;
 }
@@ -315,12 +333,22 @@ button:hover{
 #nameinput, #categoryinput{
 
     width: 80%;
+    font-family: labels;
+    padding: 2px;
+    border-radius: 7px;
+    outline: none;
+    border: 0.5px solid #0000004f;
 }
 
 #dateinput{
 
-    width: 80.5%;
+    width: 79.7%;
+    font-family: labels;
+    outline: none;
+    border-radius: 7px;
+    border: 0.5px solid grey;
 }
+
 
 #notescontainer{
 
@@ -337,6 +365,7 @@ button:hover{
     resize: none;
     overflow-y: scroll;
     z-index: 1;
+    font-family: ropasans;
 }
 
 .buttonsdiv{
