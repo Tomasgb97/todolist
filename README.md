@@ -1,7 +1,7 @@
 # Do-thig TO-DO :heavy_check_mark:
-* [Info:information_source:] (https://github.com/Tomasgb97/todolist#info)
-* [Technologies:computer:] (https://github.com/Tomasgb97/todolist#technologies)
-* [Use:green_circle:] (https://github.com/Tomasgb97/todolist#use)
+* [Info:information_source:](https://github.com/Tomasgb97/todolist#info).
+* [Technologies:computer:](https://github.com/Tomasgb97/todolist#technologies).
+* [Use:green_circle:](https://github.com/Tomasgb97/todolist#use).
 
 ## Info 
 
