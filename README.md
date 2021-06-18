@@ -47,11 +47,11 @@ to that category. You can do it using the "Add Task" button, wich should open a 
 ![Edit Task](./images/readme3.png)
 
 
--Here you can se 3 numbers: 
+-Here you can see 3 numbers: 
 
-* 1 : If you double click the notes of the app you will display an alert with a text area where you can edit the notes of that activity as you like.
+* 1 : If you double click the notes of the app you will display an alert with a text-area where you can edit the notes of that activity as you like.
 
-* 2 : if you click on the trashcan you will have to confirm you decision to delete that specific activity from your list.
+* 2 : if you click on the trashcan you will have to confirm your decision to delete that specific activity from your list.
 
 * 3 : if you double click the little task icon you will switch the state of your task from unfunished to finished or viceversa.
 
